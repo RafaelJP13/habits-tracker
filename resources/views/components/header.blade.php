@@ -7,9 +7,9 @@
     {{-- GITHUB --}}
     <div>
         Github
-    </div>
+  
     @auth
-        <form action="{{ route('auth.logout') }}" method="POST" class="bg-white p-2 border-2">
+        <form class="inline" action="{{ route('auth.logout') }}" method="POST" class="bg-white p-2 border-2">
             @csrf
             <button type="submit">
                 Sair
@@ -23,4 +23,5 @@
             Login
         </a>  
     @endguest
+    </div>
 </header>
