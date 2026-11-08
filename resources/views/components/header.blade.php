@@ -7,7 +7,7 @@
     {{-- GITHUB --}}
     <div>
         Github
-  
+    
     @auth
         <form class="inline" action="{{ route('auth.logout') }}" method="POST" class="bg-white p-2 border-2">
             @csrf

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\LoginRequest;
+    
 class LoginController extends Controller
 {
     
@@ -16,14 +18,10 @@ class LoginController extends Controller
     }
 
 
-    public function authenticate(Request $request)
+    public function authenticate(LoginRequest $request)
     {
-        $credentials = $request->validate([
 
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-
-        ]);
+        $credentials = $request->only('email', 'password');
 
         if(Auth::attempt($credentials)){
 
