@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+#[Fillable(['user_id', 'name'])]
+class Habit extends Model
+{
+    //
+}
