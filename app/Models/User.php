@@ -27,4 +27,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function habits(): HasMany
+    {
+
+        return $this->hasMany(Habit::class);
+
+    }
+
+    public function HabitLogs(): HasMany
+    {
+        return $this->hasMany(HabitLog::class);
+    }
 }
