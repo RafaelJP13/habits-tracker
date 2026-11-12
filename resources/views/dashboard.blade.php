@@ -1,17 +1,22 @@
 <x-layout>
     
-    <main class="py-10">    
+    <main class="py-10 ml-2">    
 
-        <h1>
+        <h1 class="font-bold text-4xl text-center">
             Dashboard
         </h1>
 
-        <p>
-            Bem vindo(a), {{ auth()->user()->name }}
-        </p>
+        <a href="{{ route('habit.create') }}" class="p-4 ml-2 bg-white font-bold border border-dark">
+            Criar Hábito
+        </a>
+        @session('success')
+            <p class="bg-green-100 border border-green-100 block mt-4 max-w-[200px] ml-2 mt-8">
+                {{session('success')}}
+            </p>
+        @endsession
 
-        <div text-xl mt-4>
-            <h2>
+        <div class="mt-8">
+            <h2 text-xl mt-4>
                 Listagem dos Hábitos
             </h2>
 

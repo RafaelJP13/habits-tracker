@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\HabitController;
 
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
@@ -13,10 +14,9 @@ Route::post('/cadastro', [RegisterController::class, 'store'])->name('auth.regis
 
 Route::middleware('auth')->group(function(){
 
-    # Dashboard
-    Route::get('/dashboard', [SiteController::class, 'dashboard'])->name('site.dashboard');
-
-    #Logout
+    Route::get('/dashboard', [SiteController::class, 'dashdaboard'])->name('site.dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
+    Route::get('/dashboard/habits/create', [HabitController::class, 'create'])->name('habit.create');
+    Route::post('/dashboard/habits/store', [HabitController::class, 'store'])->name('habit.store');
 
 });
