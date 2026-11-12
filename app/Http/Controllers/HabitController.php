@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\HabitRequest;
-
+use App\Models\Habit;
 class HabitController extends Controller
 {
     /**
@@ -58,8 +58,18 @@ class HabitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Habit $habit)
     {
-        //
+        if($habit->user_id !== auth()->user()->id){
+            abort(403, 'Sem permissão!');
+        }
+
+        $habit->delete();
+
+
+        return redirect()
+            ->route('site.dashboard')
+            ->with('success', 'Hábito removido com sucesso!');
+            
     }
 }
