@@ -30,10 +30,13 @@
                         <p>
                             [{{$item->habitLogs->count() }}]
                         </p>
+                        <a class=" p-2 cursor-pointer" href="{{ route('habit.edit', $item->id) }}">
+                            <x-icons.pencil/>
+                        </a>
                         <form action="{{ route('habit.destroy', $item) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="bfg-red- text-white p-2 cursor-pointer">
+                            <button type="submit" class=" text-white p-2 cursor-pointer">
                                 <x-icons.trash />
                             </button>
                         </form>
