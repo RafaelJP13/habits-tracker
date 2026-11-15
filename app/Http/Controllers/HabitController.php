@@ -8,6 +8,15 @@ use App\Http\Requests\HabitRequest;
 use App\Models\Habit;
 class HabitController extends Controller
 {
+
+    public function index()
+    {
+
+        $habits = auth()->user()->habits;
+        return view('dashboard', compact('habits'));
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +35,7 @@ class HabitController extends Controller
         auth()->user()->habits()->create($validated);
 
         return redirect()
-            ->route('site.dashboard')
+            ->route('habits.index')
             ->with('success', 'Hábito criado com sucesso!');
     
     }
@@ -59,7 +68,7 @@ class HabitController extends Controller
         $habit->update($request->all());
 
         return redirect()
-            ->route('site.dashboard')
+            ->route('habits.index')
             ->with('success', 'Hábito atualizado com sucesso!');
     }
 
@@ -76,7 +85,7 @@ class HabitController extends Controller
 
 
         return redirect()
-            ->route('site.dashboard')
+            ->route('habits.index')
             ->with('success', 'Hábito removido com sucesso!');
             
     }
