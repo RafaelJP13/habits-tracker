@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\HabitRequest;
-use App\Models\Habit;
+use App\Models\Habit; 
+use App\Models\HabitLog;
+use App\Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
 class HabitController extends Controller
 {
 
     public function index()
     {
 
-        $habits = auth()->user()->habits;
+        $habits = Auth::user()->habits;
         return view('dashboard', compact('habits'));
     }
 
@@ -32,7 +36,7 @@ class HabitController extends Controller
     {
         $validated = $request->validated();
         
-        auth()->user()->habits()->create($validated);
+            Auth::user()->habits()->create($validated);
 
         return redirect()
             ->route('habits.index')
@@ -61,7 +65,7 @@ class HabitController extends Controller
      */
     public function update(HabitRequest $request, Habit $habit)
     {
-        if($habit->user_id !== auth()->user()->id){
+        if($habit->user_id !== Auth::user()->id){
             abort(403, 'Sem permissão!');
         }
 
@@ -77,16 +81,17 @@ class HabitController extends Controller
      */
     public function destroy(Habit $habit)
     {
-        if($habit->user_id !== auth()->user()->id){
+        if($habit->user_id !== Auth::user()->id){
             abort(403, 'Sem permissão!');
         }
 
         $habit->delete();
-
 
         return redirect()
             ->route('habits.index')
             ->with('success', 'Hábito removido com sucesso!');
             
     }
+
+    
 }

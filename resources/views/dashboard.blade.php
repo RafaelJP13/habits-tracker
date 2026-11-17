@@ -1,6 +1,6 @@
 <x-layout>
     
-    <main class="py-10 ml-2">    
+    <main class="py-10 ml-2 min-h-[calc(100vh-160px)]">    
 
         <h1 class="font-bold text-4xl text-center">
             Dashboard

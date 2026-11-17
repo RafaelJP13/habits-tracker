@@ -7,7 +7,7 @@
         <title>{{ config('app.name') }}</title>
     </head>
     @vite('resources/css/app.css')
-<body class="bg-[#FFEDD6]">
+<body class="bg-[#FFEDD6] min-h-screen">
     {{-- HEADER --}}
     <!-- Esse HEADER aparece como comentário -->
     <x-header/>

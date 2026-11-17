@@ -16,5 +16,5 @@ Route::middleware('auth')->group(function(){
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
     Route::resource('dashboard/habits', HabitController::class)->except('show');
-
+    // Route::post('dashboard/habits/{habit}/toggle', HabitController::class, 'toggle')->name('habits.toggle');
 });
