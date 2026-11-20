@@ -10,7 +10,7 @@ use App\Models\HabitLog;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
-class HabitController extends Controller
+    class HabitController extends Controller
 {
 
     public function index()
@@ -101,34 +101,35 @@ class HabitController extends Controller
 
     }
 
-    // public function toggle(Habit $habit){
+    public function toggle(Habit $habit){
 
-    //     if($habit->user_id !== Auth::user()->id){
-    //         abort(403, 'Sem permissão!');
-    //     }
+        if($habit->user_id !== Auth::user()->id){
+            abort(403, 'Sem permissão!');
+        }
 
-    //     $today = Carbon::today()->toDateString();
+        $today = Carbon::today()->toDateString();
 
-    //     $log = HabitLog::query()
-    //         ->where('habit_id', $habit->id)
-    //         ->where('completed_at', $today)
-    //         ->first();
+        $log = HabitLog::query()
+            ->where('habit_id', $habit->id)
+            ->where('completed_at', $today)
+            ->first();
 
-    //     if($log){
-    //         $log->delete();
-    //         $message = "Hábito desmarcado.";
+        if($log){
+            $log->delete();
+            $message = "Hábito desmarcado.";
 
-    //     }else{
-    //         HabitLog::create([
-    //             'habit_id' => $habit->id,
-    //             'completed_at' => $today 
-    //         ]);
+        }else{
+            HabitLog::create([
+                'user_id' => Auth::user()->id,
+                'habit_id' => $habit->id,
+                'completed_at' => $today 
+            ]);
 
-    //         $message = "Hábito concluído.";
-    //     }
+            $message = "Hábito concluído.";
+        }
 
-    //     return redirect()
-    //         ->route('habits.index')
-    //         ->with('success', $message);
-    // }
+        return redirect()
+            ->route('habits.index')
+            ->with('success', $message);
+    }
 }
